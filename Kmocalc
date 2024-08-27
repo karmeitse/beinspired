@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class StockCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Variables
+        Double profit = null, sellingPrice = null, purchasePrice = null, numShares = null;
+
+        // User input
+        System.out.println("Enter '?' for the unknown value you'd like to calculate.");
+
+        // Input profit
+        System.out.print("Enter Profit ('?' if unknown): ");
+        String profitInput = scanner.next();
+        if (!profitInput.equals("?")) profit = Double.parseDouble(profitInput);
+
+        // Input selling price
+        System.out.print("Enter Selling Price ('?' if unknown): ");
+        String sellingPriceInput = scanner.next();
+        if (!sellingPriceInput.equals("?")) sellingPrice = Double.parseDouble(sellingPriceInput);
+
+        // Input purchase price
+        System.out.print("Enter Purchase Price ('?' if unknown): ");
+        String purchasePriceInput = scanner.next();
+        if (!purchasePriceInput.equals("?")) purchasePrice = Double.parseDouble(purchasePriceInput);
+
+        // Input number of shares
+        System.out.print("Enter Number of Shares ('?' if unknown): ");
+        String numSharesInput = scanner.next();
+        if (!numSharesInput.equals("?")) numShares = Double.parseDouble(numSharesInput);
+
+        // Calculate the unknown value
+        if (profit == null) {
+            profit = (sellingPrice - purchasePrice) * numShares;
+            System.out.println("Calculated Profit: " + profit);
+        } else if (sellingPrice == null) {
+            sellingPrice = (profit / numShares) + purchasePrice;
+            System.out.println("Calculated Selling Price: " + sellingPrice);
+        } else if (purchasePrice == null) {
+            purchasePrice = sellingPrice - (profit / numShares);
+            System.out.println("Calculated Purchase Price: " + purchasePrice);
+        } else if (numShares == null) {
+            numShares = profit / (sellingPrice - purchasePrice);
+            System.out.println("Calculated Number of Shares: " + numShares);
+        } else {
+            System.out.println("All values are provided. No calculation necessary.");
+        }
+
+        scanner.close();
+    }
+}
